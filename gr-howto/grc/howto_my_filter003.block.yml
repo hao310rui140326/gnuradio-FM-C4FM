@@ -1,0 +1,15 @@
+id: howto_my_filter003
+label: my filter003
+category: '[Howto]'
+templates:
+  imports: import howto
+  make: howto.my_filter003()
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+outputs:
+- label: out
+  domain: stream
+  dtype: float
+file_format: 1

@@ -1,0 +1,15 @@
+id: howto_my_fm_sphase
+label: my fm sphase
+category: '[Howto]'
+templates:
+  imports: import howto
+  make: howto.my_fm_sphase()
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+outputs:
+- label: out
+  domain: stream
+  dtype: float
+file_format: 1

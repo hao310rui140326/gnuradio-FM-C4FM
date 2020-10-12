@@ -1,0 +1,15 @@
+id: howto_my_sin_phase_600hz
+label: my sin phase 600hz
+category: '[Howto]'
+templates:
+  imports: import howto
+  make: howto.my_sin_phase_600hz()
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+outputs:
+- label: out
+  domain: stream
+  dtype: float
+file_format: 1

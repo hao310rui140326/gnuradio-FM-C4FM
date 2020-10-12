@@ -1,0 +1,43 @@
+
+https://www.cnblogs.com/moon1992/p/5424677.html#_label4
+http://gnuradio.microembedded.com/outoftreemodules
+
+
+
+
+1. Tutorial 1: Creating an out-of-tree module
+	gr_modtool newmod howto
+	cd gr-howto/
+2. Tutorial 2: Writing a block (square_ff) in C++
+	gr_modtool add -t general square_ff
+
+3 Build Tree vs. Install Tree
+	mkdir build
+
+4 modify lib/cc
+
+5 Using CMake
+	cd build/
+	cmake ../   
+	make
+
+6 Making your blocks available in GRC	
+	gr_modtool makeyaml square_ff		
+
+7 install
+	cd build/	
+	sudo make install 
+
+8 sudo ldconfig
+
+
+:%s/<+MIN_IN+>/ 1 /g
+:%s/<+MAX_IN+>/ 1 /g
+
+:%s/<+MIN_OUT+>/ 1 /g
+:%s/<+MAX_OUT+>/ 1 /g
+
+:%s/<+ITYPE+>/ float /g
+:%s/<+OTYPE+>/ float /g
+
+

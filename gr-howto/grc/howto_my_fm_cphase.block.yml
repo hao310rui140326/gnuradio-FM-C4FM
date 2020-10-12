@@ -1,0 +1,15 @@
+id: howto_my_fm_cphase
+label: my fm cphase
+category: '[Howto]'
+templates:
+  imports: import howto
+  make: howto.my_fm_cphase()
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+outputs:
+- label: out
+  domain: stream
+  dtype: float
+file_format: 1
