@@ -1,0 +1,17 @@
+
+////////////////////////////////////////////////////////////////////////////
+software code:
+	1 ac4fm_tx.sh  makefile		auto script (server) 
+	2 s.py                 		tcp server (server)
+	3 c4fm_tx_params.py    		c4fm_tx_module (server)
+	4 c.py  c_start.py c_stop.py    tcp client(client)  	
+
+run:
+	modify  ip addr in s.py  c.py  c_start.py c_stop.py 
+	server:
+		make s    
+
+	client:
+		make start
+		make stop
+
