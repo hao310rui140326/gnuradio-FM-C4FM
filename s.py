@@ -2,6 +2,7 @@ import socket
 import threading
 import struct
 import json
+import subprocess
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
@@ -27,7 +28,17 @@ def float_to_hex(f):
 
 def handle_tcp(sock, addr,cnt):
     print("new connection from %s:%s" % addr)
-    sock.send(b'Welcome start!')
+    ##sock.send(b'Welcome start!')
+    
+    ret = subprocess.call('ping -c 1 192.168.2.1',stdout=subprocess.PIPE,shell=True)
+    
+    if ret == 1:
+        print('device is lost!')
+        sock.send(b'device is lost!')
+    elif ret == 0 :
+        print('device is ready!')
+        sock.send(b'device is ready!')
+
 
     #total_data=[]
     #while True:
