@@ -75,7 +75,8 @@ class c4fm_tx(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.tx_file = tx_file = '/home/hao/wrk/my_adc/nh7020_git/gr-iio.bk/iio-examples/test_da/c4fm_music.pcm'
+        self.tx_file = tx_file = '/home/hao/wrk/my_adc/nh7020_git/gr-iio.bk/iio-examples/test_da/c4fm_music2.pcm'
+        self.tx_db = tx_db = 10
         self.samp_rate = samp_rate = 38400
         self.lo_freq = lo_freq = 155194500
 
@@ -89,6 +90,9 @@ class c4fm_tx(gr.top_block, Qt.QWidget):
         self._tx_file_line_edit.returnPressed.connect(
             lambda: self.set_tx_file(str(str(self._tx_file_line_edit.text()))))
         self.top_grid_layout.addWidget(self._tx_file_tool_bar)
+        self._tx_db_range = Range(0, 89.75, 0.25, 10, 359)
+        self._tx_db_win = RangeWidget(self._tx_db_range, self.set_tx_db, 'tx db', "counter_slider", float)
+        self.top_grid_layout.addWidget(self._tx_db_win)
         self._lo_freq_range = Range(80000000, 6000000000, 100, 155194500, 200)
         self._lo_freq_win = RangeWidget(self._lo_freq_range, self.set_lo_freq, 'lo freq', "counter_slider", float)
         self.top_grid_layout.addWidget(self._lo_freq_win)
@@ -260,7 +264,7 @@ class c4fm_tx(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_const_sink_x_0_win)
-        self.iio_fmcomms2_sink_0_0 = iio.fmcomms2_sink_f32c('192.168.3.2', lo_freq, 2304000, 300000, True, False, 0x8000, False, 'A', 10.0, 10.0, '', True)
+        self.iio_fmcomms2_sink_0_0 = iio.fmcomms2_sink_f32c('192.168.2.1', lo_freq, 2304000, 300000, True, False, 0x8000, False, 'A', tx_db, 10.0, '', True)
         self.howto_my_filter003_0 = howto.my_filter003()
         self.howto_my_filter001_0 = howto.my_filter001()
         self.blocks_throttle_0_0_2_1_0 = blocks.throttle(gr.sizeof_gr_complex*1, 38400,False)
@@ -321,6 +325,13 @@ class c4fm_tx(gr.top_block, Qt.QWidget):
         Qt.QMetaObject.invokeMethod(self._tx_file_line_edit, "setText", Qt.Q_ARG("QString", str(self.tx_file)))
         self.blocks_file_source_0.open(self.tx_file, True)
 
+    def get_tx_db(self):
+        return self.tx_db
+
+    def set_tx_db(self, tx_db):
+        self.tx_db = tx_db
+        self.iio_fmcomms2_sink_0_0.set_params(self.lo_freq, 2304000, 300000, 'A', self.tx_db, 10.0, '', True)
+
     def get_samp_rate(self):
         return self.samp_rate
 
@@ -336,7 +347,7 @@ class c4fm_tx(gr.top_block, Qt.QWidget):
 
     def set_lo_freq(self, lo_freq):
         self.lo_freq = lo_freq
-        self.iio_fmcomms2_sink_0_0.set_params(self.lo_freq, 2304000, 300000, 'A', 10.0, 10.0, '', True)
+        self.iio_fmcomms2_sink_0_0.set_params(self.lo_freq, 2304000, 300000, 'A', self.tx_db, 10.0, '', True)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.lo_freq, self.samp_rate)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.lo_freq, self.samp_rate)
 

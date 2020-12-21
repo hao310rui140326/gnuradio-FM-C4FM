@@ -27,6 +27,9 @@ do
 		elif [ $lcnt -eq 2 ]
 	       	then
 			freq=$line
+		elif [ $lcnt -eq 3 ]
+	       	then
+			tdb=$line
 			##echo "freq is $freq"			
 			##if  [ $start_flag -eq 1 ] && [ $working -eq 0 ]; then	
 			if  [ $start_flag -eq 1 ] 
@@ -35,8 +38,8 @@ do
 				then
 					working=1
 					cp  -rf ./rx_data  ./data
-					./c4fm_tx_params.py  $freq  &
-					echo "c4fm_tx start !! start_flag is $start_flag ; freq is $freq !!! "
+					./c4fm_tx_db.py  $freq  $tdb  &
+					echo "c4fm_tx start !! start_flag is $start_flag ; freq is $freq !!! tdb is $tdb !!! "
 				fi
 			elif   [ $start_flag -eq 0 ]  
 		       	then
@@ -44,7 +47,7 @@ do
 				then
 					working=0
 					killall python3
-					echo "c4fm_tx stop  !! start_flag is $start_flag ; freq is $freq !!! "		
+					echo "c4fm_tx stop  !! start_flag is $start_flag ; freq is $freq !!! tdb is $tdb !!! "		
 				fi
 			fi
 		fi

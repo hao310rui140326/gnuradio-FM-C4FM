@@ -10,6 +10,7 @@ print(s.recv(1024)) # welcome start
 
 dic = {}
 dic['freq'] = 155194500
+dic['tdb'] = 10
 dic['enable'] = 1 
 dic['data_bytes'] = 32
 dic['data'] = '0123456789abcdef' 

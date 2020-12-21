@@ -65,6 +65,27 @@ blocks:
     coordinate: [34, 444]
     rotation: 0
     state: enabled
+- name: tx_db
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: tx db
+    min_len: '359'
+    orient: Qt.Vertical
+    rangeType: float
+    start: '0'
+    step: '0.25'
+    stop: '89.75'
+    value: '10'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [554, 4]
+    rotation: 0
+    state: enabled
 - name: tx_file
   id: variable_qtgui_entry
   parameters:
@@ -390,7 +411,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    attenuation1: '10.0'
+    attenuation1: tx_db
     attenuation2: '10.0'
     auto_filter: 'True'
     bandwidth: '300000'
@@ -408,7 +429,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2584, 26]
+    coordinate: [2584, 24]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0

@@ -48,6 +48,7 @@ def handle_tcp(sock, addr,cnt):
     recv_json = json.loads(total_data.decode('utf-8'))
     ##print(recv_json)
     print(recv_json['freq'])
+    print(recv_json['tdb'])
     if recv_json['data_en']==1:
         if recv_json['overwrite']==1:
             fd=open("rx_data","wb")
@@ -115,6 +116,7 @@ def handle_tcp(sock, addr,cnt):
         fc=open("cmd","w")
         fc.write("%d\n" % recv_json['enable'])
         fc.write("%d\n" % recv_json['freq'])
+        fc.write("%f\n" % recv_json['tdb'])
         fc.write("%d\n" % cnt)
         fc.write("%d\n" % recv_json['data_bytes'])
         fc.write("%d\n" % recv_json['overwrite'])
